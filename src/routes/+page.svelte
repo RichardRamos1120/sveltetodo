@@ -70,20 +70,20 @@
 </script>
 
 <section class='main-todo'>
-	<div class='add-todo-area-input'><input type='text' placeholder='Add your todos..' bind:value={task}> <button class="add-task-btn" on:click={createTodo}>+</button></div>
+	<div class='add-todo-area-input'><input type='text' placeholder='Going to the park...' bind:value={task}> <button class="add-task-btn" on:click={createTodo}>+</button></div>
 
 	<ol>
 		{#each todos as item}
 			<li>
 				<span class:completed={item.completed} class='task-name'>{item.task}</span>
 				<div>
-					<button class="complete-task-btn" on:click={()=>markAsCompleteTodo(item)}>✓</button>
-					<button class="delete-task-btn" on:click={()=>deleteTodo(item)}>✖</button>
+					<button class="complete-task-btn" class:complete-task-btn-check={item.completed} on:click={()=>markAsCompleteTodo(item)}>✓</button>
+					<button class="delete-task-btn"  on:click={()=>deleteTodo(item)}>✖</button>
 				</div>
 			</li>
 
 		{:else}
-			<p>No todos</p>
+			<p class='no-todo'>No todos</p>
 		{/each}
 	</ol>
 </section>
@@ -92,12 +92,18 @@
 
 <style>
 
+	.no-todo{
+			color: #454545;
+			font-size: 35px;
+
+	}
 	.completed{
 			text-decoration: line-through;
 			color: #979797 !important;
 	}
 	.main-todo{
-			width: 500px;
+
+			width: 1100px;
 			min-width: 320px;
 	}
 	li{
@@ -114,14 +120,15 @@
 			margin-bottom: 20px;
 	}
 	input{
-			width: 90%;
+			width: 95%;
 			outline: none;
 			border: none;
       background: #f5f5f5;
 			color: #454545;
-			padding: 10px 20px;
+			padding: 20px 30px;
 			border-radius: 20px;
 			box-shadow: 0 2px 5px rgba(0,0,0,.2);
+			font-size: 25px;
 	}
 
 	.add-task-btn{
@@ -130,13 +137,13 @@
 			display: flex;
 			justify-content: center;
 			align-items: center;
-			width: 36px;
-			height: 36px;
+			width: 63px;
+			height: 63px;
 			background-color: #5459F2;
 			border: none;
 			outline: none;
       cursor: pointer;
-			font-size: 20px;
+			font-size: 50px;
 	}
 	.add-task-btn:hover{
       background-color: #474bd7;
@@ -148,31 +155,46 @@
 			justify-content: space-between;
 			align-items: center;
       padding: 10px 0;
-			gap:10px;
+			gap:20px;
 	}
 	ol li{
 			width: 100%;
-			padding: 5px 10px;
+			padding:20px 30px;
 			border-radius: 10px;
       box-shadow: 0 2px 5px rgba(0,0,0,.2);
 	}
 	.task-name{
-      color: #454545;
-			font-size: 18px;
+      color: #656565;
+			font-size: 30px;
 			user-select: none;
+
 	}
 	.complete-task-btn,.delete-task-btn{
-			padding: 2px 7px;
+			padding: 5px 15px;
 			border: none;
 			outline: none;
 			background-color: transparent;
 			cursor: pointer;
+			font-size: 25px;
+			transition: .1s all linear;
 	}
 	.complete-task-btn{
 			border:1px solid cadetblue;
 			border-radius: 10px;
 			font-weight: bold;
       user-select: none;
+
+	}
+	.complete-task-btn:hover{
+			background-color: rgba(95, 158, 160, 0.5) !important;
+			color: whitesmoke;
+
+	}
+	.complete-task-btn-check{
+      background-color: cadetblue !important;
+      color: whitesmoke;
+
+
 	}
 	.delete-task-btn{
       border:1px solid #a05f5f;
@@ -180,4 +202,8 @@
       font-weight: bold;
       user-select: none;
 	}
+  .delete-task-btn:hover{
+      background-color: #a05f5f;
+      color: whitesmoke;
+  }
 </style>
